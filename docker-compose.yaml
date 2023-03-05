@@ -4,7 +4,13 @@ services:
   api-with-air:
     image: cosmtrek/air
     working_dir: /app
+    networks:
+      - kampusNetwork
     ports:
       - "8000:8000"
     volumes:
       - ./.:/app
+
+networks:
+  kampusNetwork:
+    name: kampusNetwork

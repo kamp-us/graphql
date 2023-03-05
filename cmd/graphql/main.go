@@ -21,7 +21,7 @@ func main() {
 		return
 	}
 
-	panoapiClient := pano_api.NewPanoAPIProtobufClient("http://localhost:8080", &http.Client{})
+	panoapiClient := pano_api.NewPanoAPIProtobufClient("http://pano-api-api-with-air-1:8080", &http.Client{})
 
 	clients := resolver.Clients{
 		PanoAPI: panoapiClient,
