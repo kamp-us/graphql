@@ -15,20 +15,13 @@ import (
 )
 
 func main() {
-
-	s, err := schema.ReadSchema("./schema/schema.graphql")
-	if err != nil {
-		fmt.Println("An error occurred while reading schema. Error:", err)
-		return
-	}
-
 	panoapiClient := pano_api.NewPanoAPIProtobufClient(os.Getenv("PANOAPI_URI"), &http.Client{})
 
 	clients := resolver.Clients{
 		PanoAPI: panoapiClient,
 	}
 
-	schema := graphql.MustParseSchema(s, &resolver.Resolver{Clients: &clients}, graphql.UseStringDescriptions())
+	schema := graphql.MustParseSchema(schema.Schema, &resolver.Resolver{Clients: &clients}, graphql.UseStringDescriptions())
 	http.Handle("/graphql", &relay.Handler{Schema: schema})
 
 	fmt.Println("Listening to :8000")
